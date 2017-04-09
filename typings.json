@@ -1,0 +1,6 @@
+{
+  "globalDependencies": {
+    "arcgis-js-api": "registry:dt/arcgis-js-api#4.3.0+20170307004206",
+    "require": "registry:dt/require#2.1.20+20160919185614"
+  }
+}
