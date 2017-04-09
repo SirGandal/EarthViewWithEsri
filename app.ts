@@ -19,6 +19,10 @@ require([
 	
     var randomLocation = [21.26842, -11.109281];
 
+    if(locations){
+	    randomLocation = locations[Math.floor(Math.random()*locations.length)];
+    }
+    
     var point = new Point({
         latitude: randomLocation[0],
         longitude: randomLocation[1]
