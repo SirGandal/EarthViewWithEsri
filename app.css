@@ -7,3 +7,10 @@ html,
       width: 100%;
       z-index: -1;
     }
+
+    .random-location {
+      background-color: white;
+      padding: 2px;
+      height: 28px;
+      width: 28px;
+    }

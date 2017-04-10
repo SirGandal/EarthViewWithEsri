@@ -1,13 +1,15 @@
 /// <reference path="typings/index.d.ts" />
 
 require([
+    "dojo/dom-construct",
+    "dojo/on",
     "esri/Map",
     "esri/WebMap",
     "esri/views/MapView",
     "esri/geometry/Point",
     "esri/layers/TileLayer",
     "dojo/domReady!"
-], function (Map, WebMap, MapView, Point, TileLayer) {
+], (domConstruct, on, Map, WebMap, MapView, Point, TileLayer) => {
 
     var highResImagery = new TileLayer({
         url: "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
@@ -17,7 +19,7 @@ require([
         layers: [highResImagery]
     });
 	
-    var randomLocation = [21.26842, -11.109281];
+    var randomLocation = getRandomLocation();
 
     if(locations){
 	    randomLocation = locations[Math.floor(Math.random()*locations.length)];
@@ -33,6 +35,26 @@ require([
         map: mainMap
     });
 
+    var randomIcon = domConstruct.create("img", {
+        src: "icons/shuffleEarth.png",
+        id: "randomIcon",
+        title: "randomIcon",
+        class: "random-location"
+    });
+
+    mainView.ui.add(randomIcon, "top-left");
+
+    on(randomIcon, "click", () => {
+        let randomLocation = getRandomLocation();
+
+        mainView.goTo({
+            center: [randomLocation[1], randomLocation[0]],
+            scale: 15000,
+            heading: 0,
+            tilt: 0
+        });
+    });
+    
     mainView.then(() => {
         mainView.goTo({
             center: [point.longitude, point.latitude],
@@ -42,3 +64,11 @@ require([
         });
     });
 });
+
+function getRandomLocation(){
+    if(!locations){
+        return [21.26842, -11.109281];
+    }
+
+	return locations[Math.floor(Math.random()*locations.length)];
+}
