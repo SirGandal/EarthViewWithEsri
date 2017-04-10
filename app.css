@@ -8,9 +8,12 @@ html,
       z-index: -1;
     }
 
-    .random-location {
+    .random-location-image, .download-image{
       background-color: white;
       padding: 2px;
       height: 28px;
       width: 28px;
+      border-radius: 3px;
     }
+
+    
